@@ -1,0 +1,4 @@
+{
+	"apis": ["webhook", "homekit", "websocket"],
+	"providers": ["hue", "gpio", "serial"]
+}

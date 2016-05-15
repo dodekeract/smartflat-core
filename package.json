@@ -9,10 +9,13 @@
     "prepublish": "npm run build",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags",
     "postinstall": "echo '{ \"presets\": [\"es2015\"] }' > .babelrc",
-    "start": "node build/",
+    "start": "node build/cli --config ../config.json",
     "watch": "nodemon --watch source --exec \"npm run build --silent && npm run start --silent\"",
     "watch-test": "nodemon --watch source --watch test --exec \"npm run test --silent\"",
     "travis": "npm run test && nyc report --reporter=text-lcov | coveralls"
+  },
+  "bin": {
+    "smartflat": "build/cli.js"
   },
   "repository": {
     "type": "git",
@@ -43,6 +46,7 @@
     "nyc": "^6.4.4"
   },
   "dependencies": {
-    "smartflat-device": "0.0.1"
+    "smartflat-device": "0.0.1",
+    "yargs": "^4.7.0"
   }
 }
