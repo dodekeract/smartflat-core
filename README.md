@@ -12,8 +12,17 @@ The mainframe of smartflat. Loads and connects other smartflat modules.
 
 ## Installation
 
+Since this module is used to run smartflat, it should be installed globally. If installed correctly, you should be able to just run `smartflat` to start it.
+
+### Via `npm`
+
+- `npm install -g smartflat-core`
+
+### Via `git`
+
 - `git clone https://github.com/dodekeract/smartflat-core`
 - `npm install`
+- `npm link`
 - `npm run build`
 
 ## FAQ
