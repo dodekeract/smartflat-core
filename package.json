@@ -52,9 +52,8 @@
     "yargs": "^4.7.0"
   },
   "minimalism": {
-    ".gitignore": "node_modules/\nnpm-debug.log\n.babelrc\n.nyc_output/\n.travis.yml\n.gitignore\n.npmignore",
+    ".gitignore": "node_modules/\nnpm-debug.log\n.babelrc\n.nyc_output/\n.gitignore\n.npmignore",
     ".npmignore": "node_modules/\nsource/\nnpm-debug.log\n.gitignore\n.babelrc\n.nyc_output/\ntest/",
-    ".babelrc": "{ \"presets\": [\"es2015\"] }",
-    ".travis.yml": "sudo: false\nlanguage: node_js\nnode_js:\n  - 'stable'\n  - '4.2.0'\nscript: npm run travis"
+    ".babelrc": "{ \"presets\": [\"es2015\"] }"
   }
 }
