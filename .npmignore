@@ -1,0 +1,7 @@
+node_modules/
+source/
+npm-debug.log
+.gitignore
+.babelrc
+.nyc_output/
+test/
