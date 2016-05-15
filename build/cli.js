@@ -1,36 +1,18 @@
 #! /usr/bin/env node
 'use strict';
 
-var argv = require('yargs').usage('Usage: $0').default('config', '/etc/smartflat/config.json').describe('config', 'Config-file path').help().alias('help', 'h').alias('config', 'c').argv;
+var _install = require('./install');
 
-var config = void 0;
-var apis = {};
-var required = {
-	http: false
-};
+var _install2 = _interopRequireDefault(_install);
 
-try {
-	config = require(argv.config);
-} catch (error) {
-	console.error('could not load config file \'' + argv.config + '\'');
-	process.exit(1);
-}
+var _start = require('./start');
 
-console.log('---loading apis---');
+var _start2 = _interopRequireDefault(_start);
 
-config.apis.forEach(function (api) {
-	try {
-		console.log('loading smartflat-' + api + '-api');
-		apis[api] = require('smartflat-' + api + '-api');
-	} catch (error) {
-		console.log('could not load smartflat-' + api + '-api');
-	}
-});
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log('---loading providers---');
-
-config.providers.forEach(function (provider) {
-	try {} catch (error) {
-		console.log('could not load smartflat-' + provider);
-	}
-});
+var argv = require('yargs').version(require('../package.json').version).usage('Usage: $0 <command>').command('install <package>', 'Install a smartflat package', function () {}, function (argv) {
+	(0, _install2.default)(argv.package);
+}).command('start', 'Start the server', function () {}, function (argv) {
+	(0, _start2.default)(argv);
+}).default('config', '/etc/smartflat/config.json').describe('config', 'Config-file path').help().alias('help', 'h').alias('config', 'c').alias('version', 'v').strict().argv;

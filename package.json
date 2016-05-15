@@ -2,13 +2,13 @@
   "name": "smartflat-core",
   "version": "0.0.0",
   "description": "Loads and connects smartflat modules.",
-  "main": "build/",
+  "main": "build/cli.js",
   "scripts": {
     "test": "npm run build --silent && nyc --require babel-core/register mocha",
     "build": "babel --presets es2015 source/ -d build/",
     "prepublish": "npm run build",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags",
-    "postinstall": "echo '{ \"presets\": [\"es2015\"] }' > .babelrc",
+    "postinstall": "node node_modules/minimalism/source",
     "start": "node build/cli --config ../config.json",
     "watch": "nodemon --watch source --exec \"npm run build --silent && npm run start --silent\"",
     "watch-test": "nodemon --watch source --watch test --exec \"npm run test --silent\"",
@@ -46,7 +46,15 @@
     "nyc": "^6.4.4"
   },
   "dependencies": {
+    "minimalism": "0.0.3",
+    "shelljs": "^0.7.0",
     "smartflat-device": "0.0.1",
     "yargs": "^4.7.0"
+  },
+  "minimalism": {
+    ".gitignore": "node_modules/\nnpm-debug.log\n.babelrc\n.nyc_output/\n.travis.yml\n.gitignore\n.npmignore",
+    ".npmignore": "node_modules/\nsource/\nnpm-debug.log\n.gitignore\n.babelrc\n.nyc_output/\ntest/",
+    ".babelrc": "{ \"presets\": [\"es2015\"] }",
+    ".travis.yml": "sudo: false\nlanguage: node_js\nnode_js:\n  - 'stable'\n  - '4.2.0'\nscript: npm run travis"
   }
 }
