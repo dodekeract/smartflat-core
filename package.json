@@ -9,7 +9,8 @@
     "prepublish": "npm run build",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags",
     "postinstall": "node node_modules/minimalism/source",
-    "start": "node build/cli --config ../config.json",
+    "start": "node build/server",
+    "cli": "node build/cli --config ../config.json",
     "watch": "nodemon --watch source --exec \"npm run build --silent && npm run start --silent\"",
     "watch-test": "nodemon --watch source --watch test --exec \"npm run test --silent\"",
     "travis": "npm run test && nyc report --reporter=text-lcov | coveralls"
@@ -46,6 +47,9 @@
     "nyc": "^6.4.4"
   },
   "dependencies": {
+    "babel-polyfill": "^6.13.0",
+    "koa": "^1.2.1",
+    "koa-router": "^5.4.0",
     "minimalism": "0.0.3",
     "shelljs": "^0.7.0",
     "smartflat-device": "0.0.1",
